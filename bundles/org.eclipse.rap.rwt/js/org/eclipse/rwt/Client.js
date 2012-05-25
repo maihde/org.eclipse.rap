@@ -299,7 +299,11 @@ qx.Class.define( "org.eclipse.rwt.Client", {
         if( isMshtml ) {
           this._parseVersion( RegExp.$1 );
           if( this._engineVersion >= 9 ) {
-            this._engineName = "newmshtml";
+        	if( document.documentMode >= 9 ) {
+              this._engineName = "newmshtml";
+        	} else {
+        	  this._engineName = "mshtml";
+        	}
           } else {
             this._engineName = "mshtml";
           }
