@@ -215,6 +215,9 @@ qx.Class.define( "org.eclipse.rwt.widgets.BasicText", {
     _getSelectionStart : qx.core.Variant.select( "qx.client", {
       "mshtml" : function() {
         this._visualPropertyCheck();
+        if( window.document.selection.type == "None" ) {
+        	return -1;
+        }
         var vSelectionRange = window.document.selection.createRange();
         // Check if the document.selection is the text range inside the input element
         if( !this._inputElement.contains( vSelectionRange.parentElement() ) ) {
@@ -258,6 +261,9 @@ qx.Class.define( "org.eclipse.rwt.widgets.BasicText", {
     _setSelectionLength : qx.core.Variant.select( "qx.client", {
       "mshtml" : function( vLength ) {
         this._visualPropertyCheck();
+        if( window.document.selection.type == "None" ) {
+        	return;
+        }
         var vSelectionRange = window.document.selection.createRange();
         if( !this._inputElement.contains(vSelectionRange.parentElement() ) ) {
           return;
@@ -294,6 +300,9 @@ qx.Class.define( "org.eclipse.rwt.widgets.BasicText", {
     _getSelectionLength : qx.core.Variant.select( "qx.client", {
       "mshtml" : function() {
         this._visualPropertyCheck();
+        if( window.document.selection.type == "None" ) {
+        	return 0;
+        }
         var vSelectionRange = window.document.selection.createRange();
         if( !this._inputElement.contains( vSelectionRange.parentElement() ) ) {
           return 0;
